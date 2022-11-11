@@ -1,24 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
+import { ComponentC } from './context/ComponentC';
+import { createContext, useEffect, useState } from 'react';
+
+export const  UserContext = createContext();
 
 function App() {
+  const [products, setProducts ] = useState( [
+  {id:1, value:"test1"},
+  {id:2, value:"test2"},
+  {id:3, value:"test3"},
+]);
+
+useEffect(()=>{
+  console.log("refresh");
+})
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={{products:products, callback:setProducts}}>
+      <ComponentC />
+    </UserContext.Provider>
   );
 }
 
